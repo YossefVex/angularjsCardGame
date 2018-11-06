@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myGameApp">
+  <head>
+    <title>angularJS Game </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" rel="stylesheet" type="text/css" /> -->
+    <link href="content/game.css" rel="stylesheet" type="text/css" />
+    <link href="content/scoreBoard.css" rel="stylesheet" type="text/css" />
+    <link href="content/modal.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body ng-controller="gameController">
+    <div ng-if="modalBool" class="modal">
+      <div class="modal-content flex">
+        <span>Game Over</span>
+      </div>
+    </div>
+    <div class="nav">
+      <div class="flex">
+        <span>Timer:</span>
+        <p>&nbsp{{counter}}</p>
+      </div>
+      <div class="flex">
+        <section class="scoreboard">
+          <div class="scoreboard__player">
+              <div ng-class="['player', current==0 ? 'player--serve':'']">
+                  <div class="player__rank">1</div>
+                  <div class="player__surname">1st Player</div>
+                  <div class="player__nationality">TLV</div>
+              </div>
+              <div class="game">
+                  <div class="game__score">{{playersList[0].score}}</div>
+              </div>
+          </div>
+          <div class="scoreboard__player">
+            <div ng-class="['player', current==1 ? 'player--serve':'']">
+                <div class="player__rank">2</div>
+                <div class="player__surname">2nd Player</div>
+                <div class="player__nationality">Haifa</div>
+            </div>
+            <div class="game">
+                <div class="game__score">{{playersList[1].score}}</div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+      <div id="controller">
+        <div  id="container">
+          <div ng-repeat="elem in cards" ng-click="flipCard($index)">
+            <img  class="card" ng-src="{{elem.flipped==true ? elem.image : '/content/walmart.jpg'}}" alt="">
+
+          </div>
+        </div>
+
+
+      </div>
+  </body>
+</html>

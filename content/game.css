@@ -1,0 +1,97 @@
+html, body{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+body{
+  background: #9b9990;
+}
+#controller{
+  display: flex;
+  align-items: center;
+}
+#container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+}
+.nav{
+  color: #fff;
+  font-family: 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-size: 24px;
+
+}
+.flex{
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+.card {
+  background: transparent;
+  color: #000;
+  width: 150px;
+  height: 200px;
+  cursor: pointer;
+  border: 1px solid #333;
+  border-radius: 10px;
+  margin: 5px;
+  box-shadow: 4px 4px 10px #555;
+}
+
+.card.front {
+  transform: rotateX(0deg) rotateY(0deg);
+  transition: all 0.4s ease-in-out;
+  backface-visibility: visible;
+  border-radius: 10px;
+  box-shadow: 4px 4px 10px #555;
+  z-index: 10;
+}
+
+@keyframes drop {
+  0% {
+    transform: scale(2, 2) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+  50% {
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(-25deg);
+  }
+  100% {
+    transform: scale(0.97, 0.97) rotateX(0deg) rotateY(0deg) rotateZ(-45deg);
+  }
+}
+
+.card .back {
+  background: purple;
+  transform: rotateX(0deg) rotateY(180deg);
+  transform-style: preserve-3d;
+  transition: all 0.4s ease-in-out;
+  backface-visibility: hidden;
+  z-index: 5;
+}
+
+.card.flip .front {
+  transform: rotateY(180deg);
+  transform-style: preserve-3d;
+  transition: all 0.4s ease-in-out;
+  backface-visibility: hidden;
+  z-index: 900;
+}
+
+.card.flip .back {
+  transform: rotateY(0deg);
+  transform-style: preserve-3d;
+  transition: all 0.4s ease-in-out;
+  backface-visibility: visible;
+  z-index: 1000;
+}
+@media screen and (max-width: 700px) {
+  .card{
+    width: 100px;
+    height: 140px;
+  }
+}

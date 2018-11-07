@@ -17,12 +17,13 @@ $scope.cards = {}
 $scope.cardFlipped = []
 
 $scope.modalBool = false
-
+// local timeout variable
+var mytimeout;
 
 $scope.Timer = null;
 // counter => countdown timer, 10s
 $scope.counter = $scope.timerSec;
-var mytimeout;
+
 $scope.onTimeout = function(){
     if($scope.counter>0){
       $scope.counter--;
@@ -30,7 +31,7 @@ $scope.onTimeout = function(){
     } else if($scope.counter==0){
       $scope.stopTimeout()
       $scope.flipBack('timer')
-      switchCurentPlayer()
+      $scope.switchCurentPlayer()
     }
 }
 $scope.stopTimeout = function(){
@@ -61,23 +62,24 @@ $scope.flipCard = function(index){
         $scope.modalBool = true
         $scope.sendScores()
       } else
-        switchCurentPlayer()
+        $scope.switchCurentPlayer()
       }
 
   }
 }
-  $scope.sendScores = function(){
+// sending the result of game to server
+$scope.sendScores = function(){
     console.log($scope.playersList)
     $http.post('https://dev-bot.pico.buzz/memory', $scope.playersList).then(function(res){
       console.log("finish", res)
     })
   }
-function switchCurentPlayer(){
+$scope.switchCurentPlayer = function(){
   $scope.current = ($scope.current == 0) ? 1 : 0;
   $scope.onTimeout();
 }
-
-function getRandomInt(min, max) {
+// didnt use - for mixing the pairs
+$scope.getRandomInt = function(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 $scope.flipBack = function(sender){
@@ -113,9 +115,7 @@ $scope.checkCardsMatch = function(){
   for (var i = 0; i < 2; i++) {
     $scope.playersList.push(new Player(i,0))
   }
-
   $scope.onTimeout();
-
 }]);
 
 

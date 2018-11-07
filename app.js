@@ -81,15 +81,17 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 $scope.flipBack = function(sender){
+  var action = function(){
+    if(typeof $scope.cards[$scope.cardFlipped[0]]!='undefined')
+      $scope.cards[$scope.cardFlipped[0]].flipped = false
+    if(typeof $scope.cards[$scope.cardFlipped[1]]!='undefined')
+      $scope.cards[$scope.cardFlipped[1]].flipped = false
+      $scope.cardFlipped = [];
+  }
+  if(sender=='timer'){action()}else
   $timeout( function(){
     console.log($scope.cardFlipped, sender);
-
-  if(typeof $scope.cards[$scope.cardFlipped[0]]!='undefined')
-    $scope.cards[$scope.cardFlipped[0]].flipped = false
-  if(typeof $scope.cards[$scope.cardFlipped[1]]!='undefined')
-    $scope.cards[$scope.cardFlipped[1]].flipped = false
-    $scope.cardFlipped = [];
-
+    action()
   }, 2000)
 }
 // check the 2 cards flipped
